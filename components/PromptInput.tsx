@@ -1,6 +1,6 @@
-
 import React, { useState } from 'react';
 import { ImageGenerationConfig } from '../types';
+import configData from '../config.ts';
 
 interface PromptInputProps {
   onGenerate: (prompt: string, config: ImageGenerationConfig) => void;
@@ -9,7 +9,7 @@ interface PromptInputProps {
 
 const PromptInput: React.FC<PromptInputProps> = ({ onGenerate, isLoading }) => {
   const [prompt, setPrompt] = useState('');
-  const [aspectRatio, setAspectRatio] = useState<ImageGenerationConfig['aspectRatio']>('1:1');
+  const [aspectRatio, setAspectRatio] = useState<ImageGenerationConfig['aspectRatio']>(configData.defaults.aspectRatio);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

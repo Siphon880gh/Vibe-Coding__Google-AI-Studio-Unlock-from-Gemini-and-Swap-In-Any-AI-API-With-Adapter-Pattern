@@ -1,6 +1,6 @@
-
 import { GoogleGenAI } from "@google/genai";
 import { ImageGenerationConfig } from "../types";
+import configData from "../config.ts";
 
 export const generateImage = async (prompt: string, config: ImageGenerationConfig): Promise<string> => {
   const apiKey = process.env.API_KEY;
@@ -12,7 +12,7 @@ export const generateImage = async (prompt: string, config: ImageGenerationConfi
   
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash-image',
+      model: configData.geminiImageModel,
       contents: {
         parts: [
           {

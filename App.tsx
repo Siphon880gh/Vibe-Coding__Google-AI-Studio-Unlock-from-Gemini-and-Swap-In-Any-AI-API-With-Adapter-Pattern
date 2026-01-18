@@ -1,11 +1,10 @@
-
 import React, { useState, useCallback } from 'react';
 import Header from './components/Header';
 import PromptInput from './components/PromptInput';
 import ImageGallery from './components/ImageGallery';
 import ImageModal from './components/ImageModal';
 import { GeneratedImage, ImageGenerationConfig } from './types';
-import { generateImage } from './services/geminiService';
+import { getImageAdapter } from './services/adapters/factory';
 
 const App: React.FC = () => {
   const [images, setImages] = useState<GeneratedImage[]>([]);
@@ -17,10 +16,15 @@ const App: React.FC = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const url = await generateImage(prompt, config);
+      const adapter = getImageAdapter();
+      const { imageUrl } = await adapter.generateImage({ 
+        prompt, 
+        aspectRatio: config.aspectRatio 
+      });
+
       const newImage: GeneratedImage = {
         id: Math.random().toString(36).substring(7),
-        url,
+        url: imageUrl,
         prompt,
         timestamp: Date.now(),
       };
