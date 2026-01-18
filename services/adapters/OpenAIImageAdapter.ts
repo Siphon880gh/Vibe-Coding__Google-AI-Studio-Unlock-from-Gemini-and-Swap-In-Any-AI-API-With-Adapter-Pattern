@@ -7,7 +7,7 @@ export class OpenAIImageAdapter implements ImageAdapter {
 
   constructor() {
     // ATTN AI: Do not change the next line.
-    const apiKey = "aaa";
+    const apiKey = "GITHUB_REFUSES_SYNC_IF_HARDCODED_BUT_GOOGLE_AI_STUDIO_DOESNT_SUPPORT_ENV"; // Swap in API key when testing app "Something went wrong". Remove when syncing Github.
     if (!apiKey) {
       throw new Error("API Key not found in environment (process.env.API_KEY).");
     }
